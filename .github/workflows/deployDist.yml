@@ -2,14 +2,41 @@
 # automate deployment process
 
 name: deployment dist
-on: push
+on: [ push , workflow_dispatch]
 jobs:
     test:
         runs-on: ubuntu-latest
         steps:
            - name: code ko mera repo se ubuntu pe dalo
-             run: |
-              echo "cloning repo"
-              echo "${{toJson(github)}}"
-              git clone https://github.com/${{github.repository}}.git
+             uses: actions/checkout@v4.2.2
+
+           - name: install node js in virtual machine
+             uses: actions/setup-node@v4
+             with:
+              node-version: 20
+           - name: print node version
+             run: node -v
+
+           - name: Install Dependencies
+             run: npm install
+          
+           - name: Install Dependencies
+             run: npm run test
+
+
+             # or run: npm ci -> ci package-lock.json file se Dependencies install karta h,
+             #                   because package-lock.json file me exact Dependencies mention hota h
+             
+             # run: npm install -> ye package.json file use karta h ,to insall dependencies
+
+            # first method  -> uses: actions/checkout@v4.2.2
+            # apne repository wale code ko github action me 
+            # remote machine me dalne ke liye isko use karta h
+
+
+            #  second method
+            #  run: |
+            #   echo "cloning repo"
+            #   echo "${{toJson(github)}}"
+            #   git clone https://github.com/${{github.repository}}.git
 

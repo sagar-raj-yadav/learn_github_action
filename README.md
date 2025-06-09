@@ -65,3 +65,19 @@ jobs:
            - name: "first print hello"  -> only for description
              run: echo "hello world this is my first job" -> linux pe kuch print karne ke liye echo command ka use karte h
 
+# versions in package.json
+-> "react": "^19.1.2" -> 
+caret (^) means,  Minor aur patch version auto update ho sakte hain, lekin major version fix rahega
+
+-> Major->19 , 1-> minor , 2-> patch version
+
+-> Major : Agar major version badla, toh shayad code crash ho jaye, jab tak tum usse update na karo.
+
+->Minor  : Jab naye features add kiye jaate hain without breaking old code.
+
+->Patch : bug fix karte h
+
+Note:- minor and patch change hone se code crash nhi hota.
+
+
+# Marketplace
