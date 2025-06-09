@@ -79,5 +79,8 @@ caret (^) means,  Minor aur patch version auto update ho sakte hain, lekin major
 
 Note:- minor and patch change hone se code crash nhi hota.
 
+# Note:
+agar maine apne code me sirf comment add kiya h and main iss comment ko github me push karna chahte h,but agar code push kiye to workflow automatically trigger ho jayega, lekin hum nhi cahte ki workflow trigger ho , then we write [skip ci] => { git commit -m "add comment [skip ci]"  }
+
 
 # Marketplace
