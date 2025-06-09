@@ -53,5 +53,5 @@ your github repo->setting->Secrets and Variables->Actions->New repository secret
 
 Note: 
 i.4 space ka indentation denge
-ii.jo bhi mera yml ka code h wo koi remote machine pe chalega,isliye hum remote machine choose karte h.
+ii.jo bhi mera yml ka code h wo koi remote machine pe chalega,isliye hum remote machine choose karte h. [ like linux machine(ubuntu-latest) ]
 
