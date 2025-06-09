@@ -55,3 +55,13 @@ Note:
 i.4 space ka indentation denge
 ii.jo bhi mera yml ka code h wo koi remote machine pe chalega,isliye hum remote machine choose karte h. [ like linux machine(ubuntu-latest) ]
 
+# first.yml
+name: first   -> name of the workflow
+on: push      -> this is a event ( code push karne pe ye workflow run hoga )
+jobs:       
+    firstjob:  -> name of job
+        runs-on: ubuntu-latest  -> workflow kis machine pe run karega
+        steps:
+           - name: "first print hello"  -> only for description
+             run: echo "hello world this is my first job" -> linux pe kuch print karne ke liye echo command ka use karte h
+

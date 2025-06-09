@@ -1,0 +1,15 @@
+
+# automate deployment process
+
+name: deployment dist
+on: push
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+           - name: code ko mera repo se ubuntu pe dalo
+             run: |
+              echo "cloning repo"
+              echo "${{toJson(github)}}"
+              git clone https://github.com/${{github.repository}}.git
+
