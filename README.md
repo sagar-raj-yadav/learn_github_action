@@ -48,11 +48,10 @@ your github repo->setting->Secrets and Variables->Actions->New repository secret
 # 6.create a work flow => 
   i.create a folder name ".github"
   ii.folder name "workflows"
-  iii.file name with "file_name.yaml"  (file_name.yml)
-
+  iii.file name with "any_file_name.yaml"  (or any_file_name.yml)
 
 Note: 
-i.4 space ka indentation denge
+i.4 space ka indentation hota h
 ii.jo bhi mera yml ka code h wo koi remote machine pe chalega,isliye hum remote machine choose karte h. [ like linux machine(ubuntu-latest) ]
 
 # first.yml
@@ -60,7 +59,7 @@ name: first   -> name of the workflow
 on: push      -> this is a event ( code push karne pe ye workflow run hoga )
 jobs:       
     firstjob:  -> name of job
-        runs-on: ubuntu-latest  -> workflow kis machine pe run karega
+        runs-on: ubuntu-latest  -> workflow kis VM machine pe run karega
         steps:
            - name: "first print hello"  -> only for description
              run: echo "hello world this is my first job" -> linux pe kuch print karne ke liye echo command ka use karte h
@@ -83,4 +82,17 @@ Note:- minor and patch change hone se code crash nhi hota.
 agar maine apne code me sirf comment add kiya h and main iss comment ko github me push karna chahte h,but agar code push kiye to workflow automatically trigger ho jayega, lekin hum nhi cahte ki workflow trigger ho , then we write [skip ci] => { git commit -m "add comment [skip ci]"  }
 
 
+
 # Marketplace
+
+
+# cache dependencies
+-> Baar baar npm dependencies install na karna pade , isliye hum cache dependencies ka use karte h.
+
+-> cache dependencies ek unique key generate karta h using package-lock.json and yahi key dusra workflow use kar skata h ,taki sabke liye baar baar same npm dependencies install na karna pade.
+
+->agar package-lock.json me koi new dependencies add hoga to unique key change ho jayega and github ko pata chal jayega ki koi new dependencies add hua h to sirf new dependencies ko install karega and purana wala cache se le lega.
+
+# Filter
+
+1:05:28

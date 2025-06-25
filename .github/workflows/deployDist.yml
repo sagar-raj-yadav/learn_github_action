@@ -1,27 +1,26 @@
 
 # automate deployment process
+# name: deployment dist
+# on: [ push , workflow_dispatch]
+# jobs:
+#     test:   # test case run hoga jo App.test.jsx me likha hua h
+#         runs-on: ubuntu-latest
+#         steps:
+#            - name: code ko mera repo se ubuntu pe dalo
+#              uses: actions/checkout@v4.2.2
 
-name: deployment dist
-on: [ push , workflow_dispatch]
-jobs:
-    test:
-        runs-on: ubuntu-latest
-        steps:
-           - name: code ko mera repo se ubuntu pe dalo
-             uses: actions/checkout@v4.2.2
+#            - name: install node js in virtual machine
+#              uses: actions/setup-node@v4
+#              with:
+#               node-version: 20
+#            - name: print node version
+#              run: node -v
 
-           - name: install node js in virtual machine
-             uses: actions/setup-node@v4
-             with:
-              node-version: 20
-           - name: print node version
-             run: node -v
-
-           - name: Install Dependencies
-             run: npm install
+#            - name: Install Dependencies
+#              run: npm install
           
-           - name: Install Dependencies
-             run: npm run test
+#            - name: Install Dependencies
+#              run: npm run test
 
 
              # or run: npm ci -> ci package-lock.json file se Dependencies install karta h,
@@ -45,26 +44,39 @@ jobs:
 
 
 
-  #now deploy our code
-    deploy:
-      needs: test  # ye deploy workflow tabhi run hoga jab test workflow run hoga 
-      runs-on: ubuntu-latest
-      steps:
-          - name: get code
-            uses: actions/checkout@v4.2.2
+# now deploy our code
 
-          - name: install node js in virtual machine
-            uses: actions/setup-node@v4
-            with:
-              node-version: 20
-          - name: print node version
-            run: node -v
+name: Deploy Dist
+on: [push, workflow_dispatch]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v2
 
-          - name: Install Dependencies
-            run: npm ci
-          
-          - name: Build project
-            run: npm run build  # this generates dist folder
-          
-          - name: Deploy
-            run: echo "deployed successfull"
+  deploy:
+    needs: test  # deploy tabhi chalega jab test successful hoga
+    runs-on: ubuntu-latest
+    steps:
+      - name: Push code to VM
+        uses: actions/checkout@v4.2.2
+ 
+      - name: Install Node.js in virtual machine  #name likhte h kuch print krne ke liye (like comment)
+        uses: actions/setup-node@v4 # 3rd party pacakge ka use krte h to "uses" likhte h
+        with:
+          node-version: 20
+
+      - name: Print Node version
+        run: node -v
+
+      - name: Install dependencies
+        run: npm ci   # we can also write "npm install"
+
+      - name: Build project
+        run: npm run build  # this generates the dist folder
+
+      - name: Deploy
+        run: echo "deployed successfully"
+
+
