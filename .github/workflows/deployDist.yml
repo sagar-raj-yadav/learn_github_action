@@ -8,7 +8,8 @@ permissions:
   contents: write   # gh-pages branch me push karne ke liye
 
 jobs:
-    test:   # test case run hoga jo App.test.jsx me likha hua h (Yaha pe test: job ka name hai)
+    test_deploy:   #  ye job ka ID hai (kuch bhi name ho sakta h like build , deploy...)
+        name: Run Tests and Deploy  # Job ka display name hai. Yeh GitHub Actions ke UI me green card ke upar dikhai dega.
         runs-on: ubuntu-latest
         steps:
            - name: code ko mera repo se ubuntu pe dalo
