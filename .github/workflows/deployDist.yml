@@ -28,7 +28,7 @@ jobs:
              uses: JamesIves/github-pages-deploy-action@4.1.0    
              with:    
                branch: gh-pages
-               folder: build
+               folder: dist
 
          
            - name: check test cases  # project ke package.json me jo "test" script define hai, wo run hoga.
