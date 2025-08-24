@@ -1,0 +1,61 @@
+
+# automate deployment process
+
+name: deployment dist
+on: [ push , workflow_dispatch]
+jobs:
+    test:   # test case run hoga jo App.test.jsx me likha hua h (Yaha pe test: job ka name hai)
+        runs-on: ubuntu-latest
+        steps:
+           - name: code ko mera repo se ubuntu pe dalo
+             uses: actions/checkout@v4.2.2   # 3rd party pacakge ka use krte h to "uses" likhte h
+
+           - name: install node js in virtual machine
+             uses: actions/setup-node@v4
+             with:
+              node-version: 20
+
+           - name: Node.js ka version print kro
+             run: node -v
+
+           - name: Install Dependencies
+             run: npm ci    # we can also write "npm install"
+ 
+           - name: build project
+             run: npm run build     # this generates the dist folder
+
+           - name: deploy to github pages
+             uses: JamesIves/github-pages-deploy-action@4.1.0    
+             with:    
+               branch: gh-pages
+               folder: build
+
+         
+           - name: check test cases  # project ke package.json me jo "test" script define hai, wo run hoga.
+             run: npm run test  # isse unit tests run hota h
+
+
+
+# run: npm ci -> ci package-lock.json file se Dependencies install karta h,
+#       because package-lock.json file me exact Dependencies mention hota h
+             
+# run: npm install -> ye package.json file use karta h ,to insall dependencies
+
+
+
+# first method  -> 
+# uses: actions/checkout@v4.2.2
+# Ye step tumhare GitHub repo ka code clone karega us virtual machine (runner) me.
+# Matlab VM ke andar tumhara pura project aa jayega.
+
+#  second method ->
+#  run: |
+#   echo "cloning repo"
+#   echo "${{toJson(github)}}"
+#   git clone https://github.com/${{github.repository}}.git
+
+   
+
+# notes :- 
+# workflow_dispatch -> means hum github me jake iss workflow ko manually run kar sakte h
+
