@@ -3,6 +3,10 @@
 
 name: deployment dist
 on: [ push , workflow_dispatch]
+
+permissions:
+  contents: write   # gh-pages branch me push karne ke liye
+
 jobs:
     test:   # test case run hoga jo App.test.jsx me likha hua h (Yaha pe test: job ka name hai)
         runs-on: ubuntu-latest
